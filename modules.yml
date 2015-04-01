@@ -1,0 +1,86 @@
+version: "1.7.10"
+modules:
+    ngx_devel_kit:
+        source: 'https://github.com/simpl/ngx_devel_kit.git'
+        version: 'tags/v0.2.19'
+    nginx-upstream-fair:
+        source: 'https://github.com/gnosek/nginx-upstream-fair.git'
+        version: ~
+    lua-nginx:
+        source: 'https://github.com/openresty/lua-nginx-module.git'
+        version: 'tags/v0.9.15 '
+    lua-upstream-cache-nginx:
+        source: 'https://github.com/cloudflare/lua-upstream-cache-nginx-module.git'
+        version: 'tags/v0.1.1'
+    nginx-selective-cache-purge:
+        source: 'https://github.com/wandenberg/nginx-selective-cache-purge-module.git'
+        version: 'tags/0.5.5'
+    nginx-upload-progress:
+        source: 'https://github.com/masterzen/nginx-upload-progress-module/archive/v0.9.1.tar.gz'
+    echo-nginx:
+        source: 'https://github.com/openresty/echo-nginx-module.git'
+        version: 'tags/v0.57'
+    nginx-push-stream:
+        source: 'https://github.com/wandenberg/nginx-push-stream-module.git'
+        version: 'tags/0.4.1'
+    headers-more-nginx:
+        source: 'https://github.com/openresty/headers-more-nginx-module.git'
+        version: 'tags/v0.25'
+    ngx_cache_purge:
+        source: 'https://github.com/FRiCKLE/ngx_cache_purge.git'
+        version: 'tags/2.3'
+    # naxsi:
+    #     source: 'https://github.com/nbs-system/naxsi.git'
+    #     version: 'tags/0.53-2'
+    #     postdownload:
+    #         - 'ln -s ./naxsi_config/naxsi_core.rules ./config'
+    #         - 'ln -s ./naxsi_src ./src'
+    nginx-dav-ext:
+        source: 'https://github.com/arut/nginx-dav-ext-module.git'
+        version: 'tags/v0.0.3'
+    ngx_http_substitutions_filter:
+        source: 'https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git'
+        version: 'tags/v0.6.4'
+    nginx-x-rid-header:
+        source: 'https://github.com/newobj/nginx-x-rid-header.git'
+        version: ~
+    ngx_pagespeed:
+        source: 'https://github.com/pagespeed/ngx_pagespeed.git'
+        version: 'tags/v1.9.32-3-beta'
+        postdownload:
+            - 'wget https://dl.google.com/dl/page-speed/psol/1.9.32.3.tar.gz'
+            - 'tar -xzvf 1.9.32.3.tar.gz'
+
+    ngx-fancyindex:
+        source: 'https://github.com/aperezdc/ngx-fancyindex.git'
+        version: 'tags/v0.3.5'
+
+post_nginx_download:
+    - 'git clone https://github.com/wandenberg/redis_nginx_adapter && git checkout tags/1.0.0 && '
+configure:
+    - with-http_ssl_module
+    - with-ld-opt='-Wl,-L/usr/lib/,-z,relro'
+    - with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -I/usr/include/hiredis/ -I/usr/include/luajit-2.0/'
+    - prefix=/usr/share/nginx
+    - conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-debug --with-pcre-jit --with-ipv6 --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_addition_module --with-http_dav_module --with-http_flv_module --with-http_geoip_module --with-http_gzip_static_module --with-http_image_filter_module --with-http_mp4_module --with-http_perl_module --with-http_random_index_module --with-http_secure_link_module --with-http_spdy_module --with-http_sub_module --with-http_xslt_module --with-mail --with-mail_ssl_module
+
+install_deps:
+    - libluajit-5.1-dev
+    - liblua5.1-0
+    - libluajit-5.1-common
+    - redis-server
+    - libhiredis-dev
+    - liblua5
+    - libpcre3
+    - libpcre3-dev
+    - libgd2-xpm
+    - libgd2-xpm-dev
+    - libgeoip-dev
+    - openssl
+    - libssl-dev
+    - libperl-dev
+
+enviroment:
+    LUAJIT_LIB: '/usr/lib/'
+    LUAJIT_INC: '/usr/include/luajit-2.0/'
+
