@@ -5,6 +5,7 @@ import subprocess
 
 
 config = yaml.load(open('./modules.yml'))
+hooks = config['hooks']
 env = os.environ
 for key, value in config['enviroment'].iteritems():
     if value:
@@ -16,6 +17,7 @@ base_path = '/tmp/'
 
 
 
+
 def clone_repo(url, path, version):
     shell('git clone ' + url + ' ' + path)
     if version:
@@ -24,7 +26,7 @@ def clone_repo(url, path, version):
 def download(url, path):
     download_path = os.path.join(path, 'download')
     shell('mkdir -p ' + download_path)
-    shell('wget ' + url + ' -P ' +  download_path)
+    shell('wget -nc ' + url + ' -P ' +  download_path)
 
     if url.endswith('.tar.gz'):
         filename = url.split('/')
@@ -76,6 +78,14 @@ nginx_path = download('http://nginx.org/download/nginx-' + config['version'] + '
 print configure_args
 
 shell('cd ' + nginx_path + ' && ./configure ' + configure_args)
+if 'postconfigure' in hooks:
+    for cmd in hooks['postconfigure']:
+        cmd = cmd.replace('{{nginx_path}}', nginx_path)
+        print(cmd)
+        shell(cmd)
+
+
+
 shell('cd ' + nginx_path + ' && make -j2')
 
 
