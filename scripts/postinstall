@@ -5,3 +5,6 @@ chown -R www-data:www-data /var/www
 if [ ! -f /bin/nginx ]; then
     ln -s /usr/sbin/nginx /bin/nginx 
 fi
+chown root:root /etc/init.d/nginx
+update-rc.d nginx defaults
+
