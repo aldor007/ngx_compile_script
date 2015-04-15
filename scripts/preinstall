@@ -1,0 +1,5 @@
+#/bin/bash
+cat /etc/passwd | grep www-data >/dev/null
+if [ $? -ne 0 ]; then
+    adduser --system --group --no-create-home --disabled-password --disabled-login www-data
+fi

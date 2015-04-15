@@ -79,10 +79,11 @@ print configure_args
 
 shell('cd ' + nginx_path + ' && ./configure ' + configure_args)
 if 'postconfigure' in hooks:
-    for cmd in hooks['postconfigure']:
-        cmd = cmd.replace('{{nginx_path}}', nginx_path)
-        print(cmd)
-        shell(cmd)
+    if hooks['postconfigure']:
+        for cmd in hooks['postconfigure']:
+            cmd = cmd.replace('{{nginx_path}}', nginx_path)
+            print(cmd)
+            shell(cmd)
 
 
 
