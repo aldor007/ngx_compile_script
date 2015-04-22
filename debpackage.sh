@@ -12,16 +12,21 @@ mkdir -p $deb_folder
 cp -r package/* $deb_folder
 mkdir -p $deb_folder/usr/lib/x86_64-linux-gnu/perl5/5.20/nginx
 mkdir -p $deb_folder/usr/sbin
-
+mkdir -p $deb_folder/usr/share/perl5/5.20/
+mkdir -p $deb_folder/etc/perl
+mkdir -p $deb_folder/lib
 
 cp $source_dir/conf/* $deb_folder/etc/nginx/ 
 cp $source_dir/objs/nginx $deb_folder/usr/sbin/nginx 
-cp $source_dir/objs/src/http/modules/perl/blib/arch/auto/nginx/nginx.so $deb_folder/lib 
 
 sed -i s/%%VERSION%%/$2/g $source_dir/src/http/modules/perl/nginx.pm
 
-cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/lib/x86_64-linux-gnu/perl5/5.20/nginx
+cp $source_dir/objs/src/http/modules/perl/blib/arch/auto/nginx/nginx.so $deb_folder/lib 
+
+cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/share/perl5/5.20/
 cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/lib/x86_64-linux-gnu/perl5/5.20/
+cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/share/perl5/
+cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/etc/perl/
 
 
 
