@@ -45,8 +45,8 @@ fpm \
   -v $2 \
   -C $deb_folder\
   -a all \
-  --conflicts "nginx-extras.deb, nginx-extras, nginx-common" \
-  --replaces "nginx-extras.deb, nginx-extras, nginx-common"  \
+  --conflicts "nginx-extras.deb, nginx-extras, nginx-common, nginx-full" \
+  --replaces "nginx-extras.deb, nginx-extras, nginx-common, nginx-full"  \
   -d libluajit-5.1-dev \
   -d perl-base \
   --pre-install scripts/preinstall \

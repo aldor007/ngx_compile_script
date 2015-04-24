@@ -4,7 +4,7 @@ Python script for compile nginx
 ```
 python compile.py
 ```
-The Script compile nginx in directory /tmp/nginx/nginx-VERSIon
+The Script compile nginx in directory /tmp/nginx/nginx-VERSION
 ## Configuration
 Everything is in file modules.yml (nginx version, list of modules,  flags to compile nginx)
 
