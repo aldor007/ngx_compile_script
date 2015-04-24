@@ -17,6 +17,6 @@ gem install fpm
 ```
 ### Usage
 ```
-./debpackage.sh SOURCE_DIR VERSIon
+./debpackage.sh SOURCE_DIR VERSION
 ```
 
