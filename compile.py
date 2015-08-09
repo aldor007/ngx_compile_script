@@ -48,6 +48,8 @@ def prepare_modules(modules):
             clone_repo(mod['source'], path, mod['version'])
         else:
             path = download(mod['source'], path)
+        if 'modDirAppend' in mod:
+            path = os.path.join(path, mod['modDirAppend'])
         modules_path.append(path)
         if 'postdownload' in mod:
             for post in mod['postdownload']:
@@ -88,7 +90,7 @@ if 'postconfigure' in hooks:
 
 
 
-shell('cd ' + nginx_path + ' && make -j2')
+shell('cd ' + nginx_path + ' && make -j2 && sed -i s/%%VERSION%%/{}/g src/http/modules/perl/nginx.pm'.format(config['version']))
 
 
 

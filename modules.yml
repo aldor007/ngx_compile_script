@@ -4,6 +4,9 @@ hooks:
     postconfigure: ~
 
 modules:
+    ngx-fancyindex:
+        source: 'https://github.com/aperezdc/ngx-fancyindex.git'
+        version: 'tags/v0.3.5'
     ngx_devel_kit:
         source: 'https://github.com/simpl/ngx_devel_kit.git'
         version: 'tags/v0.2.19'
@@ -36,6 +39,7 @@ modules:
     # naxsi:
     #     source: 'https://github.com/nbs-system/naxsi.git'
     #     version: 'tags/0.53-2'
+    #     modDirAppend: 'naxsi_src'
     #     postdownload:
     #         - 'ln -s ./naxsi_config/naxsi_core.rules ./config'
     #         - 'ln -s ./naxsi_src ./src'
@@ -52,9 +56,6 @@ modules:
             - 'wget -nc https://dl.google.com/dl/page-speed/psol/1.9.32.3.tar.gz'
             - 'tar -xzvf 1.9.32.3.tar.gz'
 
-    ngx-fancyindex:
-        source: 'https://github.com/aperezdc/ngx-fancyindex.git'
-        version: 'tags/v0.3.5'
 
 configure:
     - with-ld-opt=-Wl,-L/usr/lib/,-z,relro
@@ -80,6 +81,7 @@ install_deps:
     - libperl-dev
     - lib64z1
     - uuid-dev
+    - perl-base
 
 enviroment:
     LUAJIT_LIB: '/usr/lib/'
