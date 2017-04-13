@@ -7,4 +7,3 @@ if [ ! -f /bin/nginx ]; then
 fi
 chown root:root /etc/init.d/nginx
 update-rc.d nginx defaults
-

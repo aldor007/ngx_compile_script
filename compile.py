@@ -3,8 +3,6 @@ import yaml
 import os
 import subprocess
 
-
-
 config = yaml.load(open('./modules.yml'))
 hooks = config['hooks']
 env = os.environ
@@ -13,14 +11,16 @@ for key, value in config['enviroment'].iteritems():
         env[key] = value
 
 
-shell = lambda cmd: subprocess.call(cmd, shell=True, env = env)
-base_path = '/tmp/'
+shell = lambda cmd: subprocess.call(cmd, shell=True, env=env)
+base_path = '/tmp/nginx-custom'
 
+def clone_repo(url, path, version, recursive=False):
+    cmd = 'git clone'
+    if recursive:
+        cmd += ' --recursive '
 
-
-
-def clone_repo(url, path, version):
-    shell('git clone ' + url + ' ' + path)
+    cmd += ' '  + url + ' ' + path
+    shell(cmd)
     if version:
         shell('cd '+ path +' && git checkout ' + version)
 
@@ -39,13 +39,12 @@ def download(url, path):
         return os.path.join(path, lst[0])
     return download_path
 
-
 def prepare_modules(modules):
     modules_path = []
     for name, mod in modules.iteritems():
         path = os.path.join(base_path, name)
         if mod['source'].endswith('.git'):
-            clone_repo(mod['source'], path, mod['version'])
+            clone_repo(mod['source'], path, mod.get('version'), mod.get('recursive', False))
         else:
             path = download(mod['source'], path)
         if 'modDirAppend' in mod:
@@ -58,8 +57,7 @@ def prepare_modules(modules):
 
 def install_deps(deps):
     for dep in deps:
-        shell('sudo apt-get install ' + dep)
-
+        shell('sudo apt-get install -y ' + dep)
 
 def configure(args, modules):
     configure_args = ' --' + ' --'.join(args)
@@ -68,13 +66,9 @@ def configure(args, modules):
     return configure_args
 
 
-
-
-
 install_deps(config['install_deps'])
 modules = prepare_modules(config['modules'])
 configure_args = configure(config['configure'], modules)
-
 
 nginx_path = download('http://nginx.org/download/nginx-' + config['version'] + '.tar.gz', os.path.join(base_path, 'nginx'))
 
@@ -89,8 +83,4 @@ if 'postconfigure' in hooks:
             shell(cmd)
 
 
-
 shell('cd ' + nginx_path + ' && make -j2 && sed -i s/%%VERSION%%/{}/g src/http/modules/perl/nginx.pm'.format(config['version']))
-
-
-
