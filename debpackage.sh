@@ -38,7 +38,7 @@ fpm \
   --license "nonfree" \
   --url "https://mkaciuba.pl" \
   -p nginx-extras-amd64-${2}.deb \
-  -v 1  \
+  -v ${2}  \
   -C $deb_folder\
   -a all \
   --conflicts "nginx-extras.deb, nginx-extras, nginx-common, nginx-full, nginx" \
