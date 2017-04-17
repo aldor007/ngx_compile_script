@@ -30,6 +30,9 @@ modules:
         postdownload:
             - 'wget -nc https://dl.google.com/dl/page-speed/psol/1.11.33.4.tar.gz'
             - 'tar -xzvf 1.11.33.4.tar.gz'
+    ngx_geoip2:
+        source: 'https://github.com/leev/ngx_http_geoip2_module.git'
+        version: 'tags/2.0'
     ngx_brotli:
         source: 'https://github.com/google/ngx_brotli.git'
         recursive: True
@@ -59,6 +62,7 @@ install_deps:
     - lib64z1
     - uuid-dev
     - perl-base
+    - libmaxminddb-dev
 
 enviroment:
     PSOL_BINARY: ''
