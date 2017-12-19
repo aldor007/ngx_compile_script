@@ -36,7 +36,7 @@ fpm \
   --vendor "Local compilation" \
   --description "nginx web server" \
   --license "nonfree" \
-  --url "https://mkaciuba.pl" \
+  --url "https://mkaciuba.com" \
   -p nginx-extras-amd64-${2}.deb \
   -v ${2}  \
   -C $deb_folder\
