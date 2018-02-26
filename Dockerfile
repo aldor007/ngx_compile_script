@@ -5,5 +5,5 @@ WORKDIR /workspace
 ADD . /workspace
 RUN python compile.py
 RUN ls /tmp/nginx-custom
-RUN cd /workspace; bash /workspace/debpackage.sh /tmp/nginx-custom/nginx/nginx-1.13.7  1.13.7
+RUN cd /workspace; bash /workspace/debpackage.sh /tmp/nginx-custom/nginx/nginx-1.13.9  1.13.9
 ENTRYPOINT ["bash"]

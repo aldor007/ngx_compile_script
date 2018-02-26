@@ -21,7 +21,7 @@ cp $source_dir/objs/nginx $deb_folder/usr/sbin/nginx
 
 sed -i s/%%VERSION%%/$2/g $source_dir/src/http/modules/perl/nginx.pm
 
-cp $source_dir/objs/src/http/modules/perl/blib/arch/auto/nginx/nginx.so $deb_folder/lib || :
+#cp $source_dir/objs/src/http/modules/perl/blib/arch/auto/nginx/nginx.so $deb_folder/lib || true:
 
 cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/share/perl5/5.20/ || :
 cp $source_dir/src/http/modules/perl/nginx.pm $deb_folder/usr/lib/x86_64-linux-gnu/perl5/5.20/ || :
