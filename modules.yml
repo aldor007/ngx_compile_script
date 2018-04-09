@@ -1,4 +1,4 @@
-version: "1.13.9"
+version: "1.13.11"
 hooks:
     postdownload: ~
     postconfigure: ~
@@ -21,6 +21,9 @@ modules:
     ngx_http_substitutions_filter:
         source: 'https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git'
         version: 'tags/v0.6.4'
+    ngx_vts:
+        source: 'https://github.com/vozlt/nginx-module-vts.git'
+        version: 'tags/v0.1.15'
     # ngx_pagespeed:
     #     source: 'https://github.com/pagespeed/ngx_pagespeed.git'
     #     version: 'latest-stable'

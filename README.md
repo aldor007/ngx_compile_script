@@ -22,7 +22,6 @@ gem install fpm
 # Docker
 Built using docker
 ```
-docker build . -t nginx-custom
-docker run -it --name=nginx-custom nginx-customa
-docker cp  nginx-custom:/workspace/nginx-extras-amd64-1.13.7.deb .
+make build
+# result will be stored in result dir
 ``
