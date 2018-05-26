@@ -1,4 +1,4 @@
-version: "1.13.11"
+version: "1.14.0"
 hooks:
     postdownload: ~
     postconfigure: ~
@@ -9,7 +9,7 @@ modules:
         version: 'tags/v0.3.0'
     lua-nginx:
         source: 'https://github.com/openresty/lua-nginx-module.git'
-        version: 'tags/v0.10.11'
+        version: 'tags/v0.10.13'
     lua-upstream-cache-nginx:
         source: 'https://github.com/cloudflare/lua-upstream-cache-nginx-module.git'
         version: 'tags/v0.1.1'
@@ -23,16 +23,7 @@ modules:
         version: 'tags/v0.6.4'
     ngx_vts:
         source: 'https://github.com/vozlt/nginx-module-vts.git'
-        version: 'tags/v0.1.15'
-    # ngx_pagespeed:
-    #     source: 'https://github.com/pagespeed/ngx_pagespeed.git'
-    #     version: 'latest-stable'
-    #     postdownload:
-    #         - 'wget -nc https://dl.google.com/dl/page-speed/psol/1.12.34.3.tar.gz'
-    #         - 'tar -xzvf 1.11.33.4.tar.gz'
-    # ngx_geoip2:
-    #     source: 'https://github.com/leev/ngx_http_geoip2_module.git'
-    #     version: 'tags/2.0'
+        version: 'tags/v0.1.16'
     ngx_brotli:
         source: 'https://github.com/google/ngx_brotli.git'
         recursive: True
@@ -64,7 +55,7 @@ install_deps:
     - uuid-dev
     - perl-base
 
-enviroment:
+environment:
     PSOL_BINARY: ''
     MOD_PAGESPEED_DIR: ''
     LUAJIT_LIB: '/usr/lib/'
