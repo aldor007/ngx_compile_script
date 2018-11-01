@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 RUN apt-get update && apt-get install python python-yaml -y && apt-get install ruby ruby-dev rubygems build-essential sudo git wget tar unzip -y && ldconfig
 RUN gem install --no-ri --no-rdoc fpm
 WORKDIR /workspace

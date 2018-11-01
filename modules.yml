@@ -1,4 +1,4 @@
-version: "1.14.0"
+version: "1.15.5"
 hooks:
     postdownload: ~
     postconfigure: ~
@@ -23,7 +23,7 @@ modules:
         version: 'tags/v0.6.4'
     ngx_vts:
         source: 'https://github.com/vozlt/nginx-module-vts.git'
-        version: 'tags/v0.1.16'
+        version: 'tags/v0.1.18'
     ngx_brotli:
         source: 'https://github.com/google/ngx_brotli.git'
         recursive: True
