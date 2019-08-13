@@ -6,7 +6,7 @@ import subprocess
 config = yaml.load(open('./modules.yml'))
 hooks = config['hooks']
 env = os.environ
-for key, value in config['enviroment'].iteritems():
+for key, value in config['environment'].iteritems():
     if value:
         env[key] = value
 
