@@ -1,4 +1,4 @@
-version: "1.17.3"
+version: "1.28.0"
 hooks:
     postdownload: ~
     postconfigure: ~
@@ -6,31 +6,32 @@ hooks:
 modules:
     ngx_devel_kit:
         source: 'https://github.com/simpl/ngx_devel_kit.git'
-        version: 'tags/v0.3.0'
+        version: 'tags/v0.3.4'
     lua-nginx:
         source: 'https://github.com/openresty/lua-nginx-module.git'
-        version: 'tags/v0.10.13'
+        version: 'tags/v0.10.29'
     lua-upstream-cache-nginx:
         source: 'https://github.com/cloudflare/lua-upstream-cache-nginx-module.git'
         version: 'tags/v0.1.1'
     headers-more-nginx:
         source: 'https://github.com/openresty/headers-more-nginx-module.git'
-        version: 'tags/v0.33'
+        version: 'tags/v0.39'
     ngx_cache_purge:
-        source: 'https://github.com/Dreamlab/ngx_cache_purge.git'
+        source: 'https://github.com/FRiCKLE/ngx_cache_purge.git'
+        version: 'tags/2.3'
     ngx_http_substitutions_filter:
         source: 'https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git'
-        version: 'tags/v0.6.4'
+        version: 'master'
     ngx_vts:
         source: 'https://github.com/vozlt/nginx-module-vts.git'
-        version: 'tags/v0.1.18'
+        version: 'tags/v0.2.4'
     ngx_brotli:
         source: 'https://github.com/google/ngx_brotli.git'
         recursive: True
 
 configure:
-    - with-ld-opt=-Wl,-L/usr/lib/,-z,relro
-    - with-cc-opt='-g -O3 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2  -I/usr/include/luajit-2.0/  -I/usr/include/uuid/ -I/tmp/nginx-custom/ngx_pagespeed/psol/include'
+    - with-ld-opt=-Wl,-L/usr/lib/x86_64-linux-gnu/,-z,relro
+    - with-cc-opt='-g -O3 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2  -I/usr/include/luajit-2.1/  -I/usr/include/uuid/ -I/tmp/nginx-custom/ngx_pagespeed/psol/include'
     - with-http_ssl_module
     - with-http_v2_module
     - with-stream --with-stream_ssl_module
@@ -43,20 +44,18 @@ install_deps:
     - libluajit-5.1-dev
     - liblua5.1-0
     - libluajit-5.1-common
-    - libpcre3
-    - libpcre3-dev
-    - libgd2-xpm
-    - libgd2-xpm-dev
+    - libpcre2-dev
+    - libgd-dev
     - libgeoip-dev
     - openssl
     - libssl-dev
     - libperl-dev
-    - lib64z1
+    - zlib1g-dev
     - uuid-dev
     - perl-base
 
 environment:
     PSOL_BINARY: ''
     MOD_PAGESPEED_DIR: ''
-    LUAJIT_LIB: '/usr/lib/'
-    LUAJIT_INC: '/usr/include/luajit-2.0/'
+    LUAJIT_LIB: '/usr/lib/x86_64-linux-gnu/'
+    LUAJIT_INC: '/usr/include/luajit-2.1/'
